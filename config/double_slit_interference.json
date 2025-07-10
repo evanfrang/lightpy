@@ -5,7 +5,7 @@
         "Nx": 20000,
         "Ny": 480,
         "Lx_mm": 80.0,
-        "Ly_mm": 5.0,
+        "Ly_mm": 10.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {

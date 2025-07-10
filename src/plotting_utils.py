@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import jv
+import matplotlib.colors as colors
 
 def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, config):
     """
@@ -106,10 +107,14 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
     plt.show()
 
     # Plot 3: 2D Diffraction Pattern
-    plt.figure(figsize=(8, 7))
-    im3 = plt.imshow(I_final, cmap='hot', extent=imshow_extent, origin='lower')
+    I_final_positive = np.clip(I_final, a_min=1e-10, a_max=None)
+    log_vmin = I_final_positive.max() * 1e-3
+    norm_2d = colors.LogNorm(vmin=log_vmin, vmax=I_final_positive.max())
+    plt.figure()
+    im3 = plt.imshow(I_final, cmap='hot', extent=imshow_extent, origin='lower', norm=norm_2d)
     plt.title(f'2D Diffraction Pattern (z = {sim_cfg["z_prop_m"]} m)')
     plt.xlabel('x (mm)')
     plt.ylabel('y (mm)')
-    plt.colorbar(im3, label='Intensity')
+    plt.ylim(min(y_coords_mm), max(y_coords_mm))
+    #plt.colorbar(im3, label='Intensity')
     plt.show()
