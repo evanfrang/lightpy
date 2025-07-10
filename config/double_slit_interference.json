@@ -2,10 +2,10 @@
     "experiment_type": "double_slit",
     "simulation": {
         "wavelength_nm": 632.8,
-        "Nx": 8192,
-        "Ny": 1024,
-        "Lx_mm": 50.0,
-        "Ly_mm": 30.0,
+        "Nx": 16000,
+        "Ny": 2048,
+        "Lx_mm": 70.0,
+        "Ly_mm": 40.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {

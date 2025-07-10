@@ -2,10 +2,10 @@
     "experiment_type": "single_slit",
     "simulation": {
         "wavelength_nm": 500,
-        "Nx": 8192,
-        "Ny": 1024,
+        "Nx": 16000,
+        "Ny": 2048,
         "Lx_mm": 50.0,
-        "Ly_mm": 10.0,
+        "Ly_mm": 20.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {
