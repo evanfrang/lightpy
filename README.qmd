@@ -23,9 +23,10 @@ Also, I have the theoretical intensity curves for comparison, and they seem to a
 
 ## Python Requirements
 
-I am using python 3.12 for development and running.
+I am using python 3.12 for development and running it seems like you should have python >= 3.10.
 There is a requirements.txt file that contains the necessary python libraries.
-I havent tested this as I am using a conda env and froze it to produce this file.
+This file is very bloated probably because of jupyter, so experts can install just the libraries needed.
+
 To produce a virtual environment with the necessary libs:
 On linux:
 ```bash
