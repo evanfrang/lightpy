@@ -1,0 +1,20 @@
+{
+    "experiment_type": "single_slit",
+    "simulation": {
+        "wavelength_nm": 500,
+        "Nx": 2048,
+        "Ny": 2048,
+        "Lx_mm": 100.0,
+        "Ly_mm": 50.0,
+        "z_prop_m": 1.0
+    },
+    "aperture_params": {
+        "width_um": 100.0,
+        "height_mm": 1.0
+    },
+    "plot_limits": {
+        "initial_field_xlim_mm_zoom": 0.1,
+        "initial_field_ylim_mm_zoom": 0.5,
+        "diffraction_pattern_xlim_mm": 50.0
+    }
+}
