@@ -1,0 +1,71 @@
+---
+title: "LightPy"
+author: "Evan Frangipane"
+format:
+  gfm:
+    toc: true
+    code-fold: true
+    css: styles.css
+    embed-resources: true
+    html-math-method: katex
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+## Introduction
+
+LightPy is a project to simulate optics phenomena using the Angular Spectrum Method (ASM).
+Currently, you can run single slit, double slit, and circular aperture experiments.
+Also, I have the theoretical intensity curves for comparison, and they seem to agree in certain regions of parameter space.
+
+## Parameters
+
+You can play around with parameters with the json files in the config folder.
+The single slit params file looks like this:
+
+```json
+{
+    "experiment_type": "single_slit",
+    "simulation": {
+        "wavelength_nm": 500,
+        "Nx": 8192,
+        "Ny": 1024,
+        "Lx_mm": 50.0,
+        "Ly_mm": 10.0,
+        "z_prop_m": 0.5
+    },
+    "aperture_params": {
+        "width_um": 100.0,
+        "height_mm": 1.0
+    },
+    "plot_limits": {
+        "initial_field_xlim_mm_zoom": 0.2,
+        "initial_field_ylim_mm_zoom": 1.0,
+        "diffraction_pattern_xlim_mm": 10.0
+    }
+}
+```
+
+Nx and Ny are the number of pixels of the simulation, and Lx_mm, Ly_mm are the lengths of the simulation.
+z_prop_m is the distance from the aperture to the screen.
+
+## Running the Simulation
+
+To run the experiments there is a notebook called running_experiments.ipynb in the notebooks folder that will get you started.
+If you change the simulation files found in src then you will have to restart the kernel and rerun the header code.
+Changing the params files you can just rerun the experiments.
+
+## Results
+
+Here are the diffraction patterns that the simulation outputs (blue) and comparison to theory (red dashed).
+
+![](results/single.png){fig-align="center" width=80%}
+
+
+![](results/double.png){fig-align="center" width=80%}
+
+
+![](results/circular.png){fig-align="center" width=80%}
