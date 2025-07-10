@@ -1,6 +1,12 @@
 # LightPy
 Evan Frangipane
 
+- [Introduction](#introduction)
+- [Python Requirements](#python-requirements)
+- [Parameters](#parameters)
+- [Running the Simulation](#running-the-simulation)
+- [Results](#results)
+
 ## Introduction
 
 LightPy is a project to simulate optics phenomena using the Angular
@@ -8,6 +14,28 @@ Spectrum Method (ASM). Currently, you can run single slit, double slit,
 and circular aperture experiments. Also, I have the theoretical
 intensity curves for comparison, and they seem to agree in certain
 regions of parameter space.
+
+## Python Requirements
+
+I am using python 3.12 for development and running. There is a
+requirements.txt file that contains the necessary python libraries. I
+havent tested this as I am using a conda env and froze it to produce
+this file. To produce a virtual environment with the necessary libs: On
+linux:
+
+``` bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+On Windows:
+
+``` bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## Parameters
 
