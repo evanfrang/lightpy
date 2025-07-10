@@ -2,16 +2,16 @@
     "experiment_type": "double_slit",
     "simulation": {
         "wavelength_nm": 632.8,
-        "Nx": 2048,
+        "Nx": 8192,
         "Ny": 1024,
-        "Lx_mm": 30.0,
-        "Ly_mm": 15.0,
-        "z_prop_m": 1.0
+        "Lx_mm": 50.0,
+        "Ly_mm": 30.0,
+        "z_prop_m": 0.5
     },
     "aperture_params": {
-        "slit_width_um": 10.0,
-        "slit_height_mm": 0.5,
-        "slit_separation_um": 50.0
+        "slit_width_um": 40.0,
+        "slit_height_mm": 1.0,
+        "slit_separation_um": 200.0
     },
     "plot_limits": {
         "initial_field_xlim_mm_zoom": 0.05,

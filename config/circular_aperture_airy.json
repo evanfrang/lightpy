@@ -2,18 +2,18 @@
     "experiment_type": "circular_aperture",
     "simulation": {
         "wavelength_nm": 550,
-        "Nx": 1024,
-        "Ny": 1024,
-        "Lx_mm": 20.0,
-        "Ly_mm": 20.0,
-        "z_prop_m": 1.0
+        "Nx": 4096,
+        "Ny": 4096,
+        "Lx_mm": 40.0,
+        "Ly_mm": 40.0,
+        "z_prop_m": 0.5
     },
     "aperture_params": {
-        "radius_mm": 0.5
+        "radius_mm": 0.05
     },
     "plot_limits": {
         "initial_field_xlim_mm_zoom": 0.8,
         "initial_field_ylim_mm_zoom": 0.8,
-        "diffraction_pattern_xlim_mm": 15.0
+        "diffraction_pattern_xlim_mm": 10.0
     }
 }

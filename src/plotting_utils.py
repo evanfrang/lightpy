@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.special import jv
 
 def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, config):
     """
@@ -67,13 +68,32 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
     ax2 = plt.subplot(1, 2, 2)
     center_y_index = sim_cfg['Ny'] // 2
     intensity_slice = I_final[center_y_index, :]
-    ax2.plot(x_coords_mm, intensity_slice / intensity_slice.max())
+    ax2.plot(x_coords_mm, intensity_slice / intensity_slice.max(), color='blue')
     
-    # Theory: I = I0 [sin (π a y / D /λ)/( π a y / D /λ)]2
-    sin_arg = np.pi * width_mm * 1e-3 * y_coords / sim_cfg['z_prop_m'] \
-        / (sim_cfg['wavelength_nm'] * 1e-9)
-    intensity_theory = (np.sin(sin_arg) / (sin_arg))**2
-    ax2.plot(x_coords_mm, intensity_theory, color='red')
+    if experiment_type == "single_slit":
+        # Theory: I = I0 [sin (π a x / D /λ)/( π a x / D /λ)]2
+        sin_arg = np.pi * width_mm * 1e-3 * x_coords / sim_cfg['z_prop_m'] \
+            / (sim_cfg['wavelength_nm'] * 1e-9)
+        intensity_theory = (np.sin(sin_arg) / (sin_arg))**2
+        ax2.plot(x_coords_mm, intensity_theory, color='red', linestyle='--')
+
+    elif experiment_type == "double_slit":
+        # Theory: I = I0 [cos (π d x / D /λ)]2 * [sin (π a x / D /λ)/( π a x / D /λ)]2
+        cos_arg = np.pi * sep_mm * 1e-3 * x_coords / sim_cfg['z_prop_m'] \
+            / (sim_cfg['wavelength_nm'] * 1e-9)
+        sin_arg = np.pi * width_mm * 1e-3 * x_coords / sim_cfg['z_prop_m'] \
+            / (sim_cfg['wavelength_nm'] * 1e-9)
+        intensity_theory = (np.cos(cos_arg))**2 * (np.sin(sin_arg) / (sin_arg))**2
+        intensity_envelope = (np.sin(sin_arg) / (sin_arg))**2
+        ax2.plot(x_coords_mm, intensity_theory, color='red', linestyle='--')
+        ax2.plot(x_coords_mm, intensity_envelope, color='green', linestyle='--')
+
+    elif experiment_type == "circular_aperture":
+        # Theory: I = I0 [J_1(2 π a r / D /λ) / (2 π a r / D /λ)]2
+        bes_arg = 2 * np.pi * radius_mm * 1e-3 * x_coords / sim_cfg['z_prop_m'] \
+            / (sim_cfg['wavelength_nm'] * 1e-9)
+        intensity_theory = (2 * jv(1, bes_arg) / (bes_arg))**2
+        ax2.plot(x_coords_mm, intensity_theory, color='red', linestyle='--')
 
     ax2.set_title(f'Diffraction Pattern (z = {sim_cfg["z_prop_m"]} m, λ={sim_cfg["wavelength_nm"]:.0f} nm)')
     ax2.set_xlabel('x (mm)')

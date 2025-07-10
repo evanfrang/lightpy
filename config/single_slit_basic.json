@@ -2,19 +2,19 @@
     "experiment_type": "single_slit",
     "simulation": {
         "wavelength_nm": 500,
-        "Nx": 2048,
-        "Ny": 2048,
-        "Lx_mm": 100.0,
-        "Ly_mm": 50.0,
-        "z_prop_m": 1.0
+        "Nx": 8192,
+        "Ny": 1024,
+        "Lx_mm": 50.0,
+        "Ly_mm": 10.0,
+        "z_prop_m": 0.5
     },
     "aperture_params": {
         "width_um": 100.0,
         "height_mm": 1.0
     },
     "plot_limits": {
-        "initial_field_xlim_mm_zoom": 0.1,
-        "initial_field_ylim_mm_zoom": 0.5,
-        "diffraction_pattern_xlim_mm": 50.0
+        "initial_field_xlim_mm_zoom": 0.2,
+        "initial_field_ylim_mm_zoom": 1.0,
+        "diffraction_pattern_xlim_mm": 10.0
     }
 }
