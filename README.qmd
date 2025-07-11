@@ -28,6 +28,7 @@ There is a requirements.txt file that contains the necessary python libraries.
 This file is very bloated probably because of jupyter, so experts can install just the libraries needed.
 
 To produce a virtual environment with the necessary libs:
+
 On linux:
 ```bash
 python -m venv venv
@@ -131,10 +132,10 @@ Changing the params files you can just rerun the experiments.
 Here are the diffraction patterns that the simulation outputs (blue) and comparison to theory (red dashed).
 
 ![](results/single.png){fig-align="center" width=100%}
-![](results/single_2d.png){fig-align="center" width=100%}
+![](results/single_2d.png){fig-align="center" width=70%}
 
 ![](results/double.png){fig-align="center" width=100%}
-![](results/double_2d.png){fig-align="center" width=100%}
+![](results/double_2d.png){fig-align="center" width=70%}
 
 ![](results/circular.png){fig-align="center" width=100%}
-![](results/circular_2d.png){fig-align="center" width=100%}
+![](results/circular_2d.png){fig-align="center" width=70%}

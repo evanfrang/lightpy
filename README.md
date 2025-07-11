@@ -17,7 +17,9 @@ contains the necessary python libraries. This file is very bloated
 probably because of jupyter, so experts can install just the libraries
 needed.
 
-To produce a virtual environment with the necessary libs: On linux:
+To produce a virtual environment with the necessary libs:
+
+On linux:
 
 ``` bash
 python -m venv venv
@@ -127,15 +129,15 @@ comparison to theory (red dashed).
 
 <img src="results/single.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/single_2d.png" style="width:100.0%"
+<img src="results/single_2d.png" style="width:70.0%"
 data-fig-align="center" />
 
 <img src="results/double.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/double_2d.png" style="width:100.0%"
+<img src="results/double_2d.png" style="width:70.0%"
 data-fig-align="center" />
 
 <img src="results/circular.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/circular_2d.png" style="width:100.0%"
+<img src="results/circular_2d.png" style="width:70.0%"
 data-fig-align="center" />
