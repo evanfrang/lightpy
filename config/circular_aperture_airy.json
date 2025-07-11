@@ -4,12 +4,12 @@
         "wavelength_nm": 550,
         "Nx": 4096,
         "Ny": 4096,
-        "Lx_mm": 40.0,
-        "Ly_mm": 40.0,
+        "Lx_mm": 30.0,
+        "Ly_mm": 30.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {
-        "radius_mm": 0.05
+        "radius_mm": 0.1
     },
     "plot_limits": {
         "initial_field": {
