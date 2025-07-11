@@ -96,6 +96,30 @@ Fresnel Number Check, Nyquist Criterion, and Wrap-Around Check
 
 Running the validation will give a printout if the checks are passed and what to do if not.
 
+```python
+run_all_checks("single_slit_basic.json")
+```
+```
+--- Simulation Parameter Checks ---
+Fresnel Number (Fn): 0.0400
+  -> Fraunhofer (far-field) approximation likely valid for theoretical comparison.
+
+Nyquist Criterion (Spatial Resolution):
+  Max reliable distance (X): 40.13 mm
+  Max reliable distance (Y): 6.00 mm
+  Plotting range (X): +/- 10.00 mm
+  Plotting range (Y): +/- 5.00 mm
+  -> Pixel sizes (dx, dy) are adequate for the specified plot range.
+
+Wrap-Around Margin (Simulation Window Size):
+  Current Lx: 50.00 mm, Ly: 10.00 mm
+  Estimated Required Lx: 15.00 mm, Ly: 15.00 mm
+  WARNING: Ly (10.00 mm) might be too small. Recommended Ly for wrap-around is at least 15.00 mm.
+  -> Consider increasing Lx_mm and Ly_mm significantly.
+---------------------------------
+```
+
+
 ## Running the Simulation
 
 To run the experiments there is a notebook called running_experiments.ipynb in the notebooks folder that will get you started.
