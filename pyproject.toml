@@ -10,13 +10,6 @@ description = "A Python package for optical light propagation simulations."
 readme = "README.md" # Optional, but good practice to have a README
 requires-python = ">=3.9" # Specify your minimum Python version
 
-# Optional: Declare your main dependencies here as well
-dependencies = [
-    "numpy",
-    "scipy",
-    "matplotlib"
-]
-
 [project.urls]
 "Homepage" = "https://github.com/evanfrang/lightpy"
 "Bug Tracker" = "https://github.com/evanfrang/lightpy/issues"
