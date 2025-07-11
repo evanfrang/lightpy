@@ -115,10 +115,10 @@ run_all_checks("single_slit_basic.json")
 ## Running the Simulation
 
 To run the experiments there is a notebook called
-running_experiments.ipynb in the notebooks folder that will get you
-started. If you change the simulation files found in src then you will
-have to restart the kernel and rerun the header code. Changing the
-params files you can just rerun the experiments.
+running_experiments.ipynb that will get you started. If you change the
+simulation files found in lightpy/ then you will have to restart the
+kernel and rerun the header code. Changing the params files you can just
+rerun the experiments.
 
 ## Results
 
