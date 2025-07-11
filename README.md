@@ -43,20 +43,33 @@ folder. The single slit params file looks like this:
     "experiment_type": "single_slit",
     "simulation": {
         "wavelength_nm": 500,
-        "Nx": 8192,
-        "Ny": 1024,
+        "Nx": 16000,
+        "Ny": 480,
         "Lx_mm": 50.0,
         "Ly_mm": 10.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {
         "width_um": 100.0,
-        "height_mm": 1.0
+        "height_mm": 5.0
     },
     "plot_limits": {
-        "initial_field_xlim_mm_zoom": 0.2,
-        "initial_field_ylim_mm_zoom": 1.0,
-        "diffraction_pattern_xlim_mm": 10.0
+        "initial_field": {
+            "xmin_mm": -0.5,
+            "xmax_mm": 0.5,
+            "ymin_mm": -1.0,
+            "ymax_mm": 1.0
+        },
+        "diffraction_pattern_1d": {
+            "xmin_mm": -8.0,
+            "xmax_mm": 8.0
+        },
+        "diffraction_pattern_2d": {
+            "xmin_mm": -10.0,
+            "xmax_mm": 10.0,
+            "ymin_mm": -5.0,
+            "ymax_mm": 5.0
+        }
     }
 }
 ```
@@ -64,6 +77,18 @@ folder. The single slit params file looks like this:
 Nx and Ny are the number of pixels of the simulation, and Lx_mm, Ly_mm
 are the lengths of the simulation. z_prop_m is the distance from the
 aperture to the screen.
+
+Plot limits is where you can change the plot limits of the three plots
+that are currently produced when running the experiment.
+
+## Validation
+
+There is a validation check for three potential simulation issues:
+
+Fresnel Number Check, Nyquist Criterion, and Wrap-Around Check
+
+Running the validation will give a printout if the checks are passed and
+what to do if not.
 
 ## Running the Simulation
 
@@ -78,11 +103,17 @@ params files you can just rerun the experiments.
 Here are the diffraction patterns that the simulation outputs (blue) and
 comparison to theory (red dashed).
 
-<img src="results/single.png" style="width:80.0%"
+<img src="results/single.png" style="width:100.0%"
+data-fig-align="center" />
+<img src="results/single_2d.png" style="width:100.0%"
 data-fig-align="center" />
 
-<img src="results/double.png" style="width:80.0%"
+<img src="results/double.png" style="width:100.0%"
+data-fig-align="center" />
+<img src="results/double_2d.png" style="width:100.0%"
 data-fig-align="center" />
 
-<img src="results/circular.png" style="width:80.0%"
+<img src="results/circular.png" style="width:100.0%"
+data-fig-align="center" />
+<img src="results/circular_2d.png" style="width:100.0%"
 data-fig-align="center" />
