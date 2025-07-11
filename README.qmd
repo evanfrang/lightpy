@@ -25,7 +25,7 @@ Also, I have the theoretical intensity curves for comparison, and they seem to a
 
 I am using python 3.12 for development and running it seems like you should have python >= 3.10.
 There is a requirements.txt file that contains the necessary python libraries.
-This file is very bloated probably because of jupyter, so experts can install just the libraries needed.
+I removed all jupyter dependencies because it was very bloated so if you want to run in a notebook install jupyter into your env.
 
 To produce a virtual environment with the necessary libs:
 
@@ -34,12 +34,14 @@ On linux:
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+pip install jupyter
 ```
 On Windows:
 ```bash
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
+pip install jupyter
 ```
 
 
