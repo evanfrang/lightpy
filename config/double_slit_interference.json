@@ -3,19 +3,32 @@
     "simulation": {
         "wavelength_nm": 632.8,
         "Nx": 20000,
-        "Ny": 480,
+        "Ny": 1024,
         "Lx_mm": 80.0,
-        "Ly_mm": 10.0,
+        "Ly_mm": 50.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {
         "slit_width_um": 40.0,
-        "slit_height_mm": 1.0,
+        "slit_height_mm": 5.0,
         "slit_separation_um": 200.0
     },
     "plot_limits": {
-        "initial_field_xlim_mm_zoom": 0.05,
-        "initial_field_ylim_mm_zoom": 0.5,
-        "diffraction_pattern_xlim_mm": 20.0
+        "initial_field": {
+            "xmin_mm": -1.0,
+            "xmax_mm": 1.0,
+            "ymin_mm": -1.0,
+            "ymax_mm": 1.0
+        },
+        "diffraction_pattern_1d": {
+            "xmin_mm": -20.0,
+            "xmax_mm": 20.0
+        },
+        "diffraction_pattern_2d": {
+            "xmin_mm": -30.0,
+            "xmax_mm": 30.0,
+            "ymin_mm": -2.0,
+            "ymax_mm": 2.0
+        }
     }
 }

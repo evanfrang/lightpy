@@ -1,49 +1,20 @@
 import numpy as np
-import json
-import os
-from pathlib import Path
-import sys
 
-
-def find_project_root(marker_dirs=['src', 'config'], marker_files=['README.md']):
-    current_path = Path(os.getcwd())
-    while current_path != current_path.parent:
-        if any((current_path / m).is_dir() for m in marker_dirs) or \
-           any((current_path / m).is_file() for m in marker_files):
-            return current_path
-        current_path = current_path.parent
-    return None
-
-project_root = find_project_root()
-if project_root is None:
-    raise FileNotFoundError("Project root not found! Please ensure 'src' or 'README.md' exists in a parent directory.")
-
-# Add the 'src' directory to the Python path so we can import our modules
-sys.path.insert(0, str(project_root / 'src'))
-
-from core_propagator import run_angular_spectrum_simulation
-from aperture_masks import (
+from lightpy.config_manager import load_config
+from lightpy.core_propagator import run_angular_spectrum_simulation
+from lightpy.aperture_masks import (
     create_single_slit_mask,
     create_double_slit_mask,
     create_circular_aperture_mask
 )
-from plotting_utils import plot_simulation_results
-
-
-def load_config(file_path):
-    """Loads configuration parameters from a JSON file."""
-    with open(file_path, 'r') as f:
-        config = json.load(f)
-    return config
+from lightpy.plotting_utils import plot_simulation_results
 
 # --- Individual Experiment Runner Functions ---
 
 def run_single_slit_experiment(config_file_name="single_slit_basic.json"):
     """Runs and plots the single slit diffraction experiment."""
-    config_path = project_root / 'config' / config_file_name
-    print(f"--- Running Single Slit Experiment from {config_file_name} ---")
 
-    config = load_config(config_path)
+    config = load_config(config_file_name)
 
     # Extract simulation parameters and convert units
     sim_cfg = config['simulation']
@@ -78,10 +49,8 @@ def run_single_slit_experiment(config_file_name="single_slit_basic.json"):
 
 def run_double_slit_experiment(config_file_name="double_slit_interference.json"):
     """Runs and plots the double slit interference experiment."""
-    config_path = project_root / 'config' / config_file_name
-    print(f"--- Running Double Slit Experiment from {config_file_name} ---")
 
-    config = load_config(config_path)
+    config = load_config(config_file_name)
 
     # Extract simulation parameters and convert units
     sim_cfg = config['simulation']
@@ -117,10 +86,8 @@ def run_double_slit_experiment(config_file_name="double_slit_interference.json")
 
 def run_circular_aperture_experiment(config_file_name="circular_aperture_airy.json"):
     """Runs and plots the circular aperture (Airy disk) experiment."""
-    config_path = project_root / 'config' / config_file_name
-    print(f"--- Running Circular Aperture Experiment from {config_file_name} ---")
 
-    config = load_config(config_path)
+    config = load_config(config_file_name)
 
     # Extract simulation parameters and convert units
     sim_cfg = config['simulation']

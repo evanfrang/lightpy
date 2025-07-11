@@ -10,11 +10,24 @@
     },
     "aperture_params": {
         "width_um": 100.0,
-        "height_mm": 1.0
+        "height_mm": 5.0
     },
     "plot_limits": {
-        "initial_field_xlim_mm_zoom": 0.2,
-        "initial_field_ylim_mm_zoom": 1.0,
-        "diffraction_pattern_xlim_mm": 10.0
+        "initial_field": {
+            "xmin_mm": -0.5,
+            "xmax_mm": 0.5,
+            "ymin_mm": -1.0,
+            "ymax_mm": 1.0
+        },
+        "diffraction_pattern_1d": {
+            "xmin_mm": -8.0,
+            "xmax_mm": 8.0
+        },
+        "diffraction_pattern_2d": {
+            "xmin_mm": -10.0,
+            "xmax_mm": 10.0,
+            "ymin_mm": -5.0,
+            "ymax_mm": 5.0
+        }
     }
 }

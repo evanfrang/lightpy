@@ -12,8 +12,21 @@
         "radius_mm": 0.05
     },
     "plot_limits": {
-        "initial_field_xlim_mm_zoom": 0.8,
-        "initial_field_ylim_mm_zoom": 0.8,
-        "diffraction_pattern_xlim_mm": 10.0
+        "initial_field": {
+            "xmin_mm": -0.5,
+            "xmax_mm": 0.5,
+            "ymin_mm": -0.5,
+            "ymax_mm": 0.5
+        },
+        "diffraction_pattern_1d": {
+            "xmin_mm": -10.0,
+            "xmax_mm": 10.0
+        },
+        "diffraction_pattern_2d": {
+            "xmin_mm": -10.0,
+            "xmax_mm": 10.0,
+            "ymin_mm": -10.0,
+            "ymax_mm": 10.0
+        }
     }
 }

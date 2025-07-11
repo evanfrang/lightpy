@@ -1,24 +1,5 @@
 import numpy as np
-import json
-from pathlib import Path
-import os
-import sys
-
-def find_project_root(marker_dirs=['src', 'config'], marker_files=['README.md']):
-    current_path = Path(os.getcwd())
-    while current_path != current_path.parent:
-        if any((current_path / m).is_dir() for m in marker_dirs) or \
-           any((current_path / m).is_file() for m in marker_files):
-            return current_path
-        current_path = current_path.parent
-    return None
-
-project_root = find_project_root()
-if project_root is None:
-    raise FileNotFoundError("Project root not found! Please ensure 'src' or 'README.md' exists in a parent directory.")
-
-# Add the 'src' directory to the Python path so we can import our modules
-sys.path.insert(0, str(project_root / 'src'))
+from lightpy.config_manager import load_config
 
 def calculate_fresnel_number(aperture_size, wavelength, z_prop):
     """
@@ -34,44 +15,69 @@ def calculate_fresnel_number(aperture_size, wavelength, z_prop):
         return np.inf # Or handle as an error if appropriate
     return (aperture_size**2) / (wavelength * z_prop)
 
-def check_nyquist_criterion(dx, dy, wavelength, theta_max_deg=30):
+def check_nyquist_criterion(dx, dy, wavelength, x_plot_limit, y_plot_limit, z_prop):
     """
-    Checks if the spatial sampling (pixel size) meets the Nyquist criterion.
-    Args:
-        dx_m (float): Pixel size in the x-direction in meters.
-        dy_m (float): Pixel size in the y-direction in meters.
-        wavelength_m (float): Wavelength of light in meters.
-        theta_max_deg (float): Maximum expected diffraction angle in degrees (default 90).
-    Returns:
-        dict: A dictionary with 'x_ok', 'y_ok' booleans, 'dx_required', 'dy_required' values, and warnings.
-    """
-    theta_max_rad = np.deg2rad(theta_max_deg)
-    
-    # Required dx to resolve up to theta_max
-    # Note: sin(theta_max) should ideally be non-zero for this
-    if np.sin(theta_max_rad) == 0: # Handle edge case like theta_max = 0
-        dx_required = 0
-        dy_required = 0
-    else:
-        dx_required = wavelength / (2 * np.sin(theta_max_rad))
-        dy_required = wavelength / (2 * np.sin(theta_max_rad)) # Assuming symmetrical requirement
+    Calculates the maximum angle that can be reliably simulated based on Nyquist criterion
+    and compares it to the angles covered by the plot limits.
 
-    x_ok = dx <= dx_required
-    y_ok = dy <= dy_required
-    
+    Args:
+        dx (float): Pixel size in the x-direction in meters.
+        dy (float): Pixel size in the y-direction in meters.
+        wavelength (float): Wavelength of light in meters.
+        x_plot_limit (float): Max absolute x-extent of the region of interest in meters (e.g., plot_limits['diffraction_pattern_xlim_mm'] * 1e-3).
+        y_plot_limit (float): Max absolute y-extent of the region of interest in meters.
+        z_prop (float): Propagation distance in meters.
+    Returns:
+        dict: A dictionary containing the maximum resolvable x and y,
+              the required plot limits, and warnings if resolution is insufficient.
+    """
+    results = {}
     warnings = []
+
+    if z_prop == 0:
+        results['x_resolvable_mm'] = np.inf
+        results['y_resolvable_mm'] = np.inf
+        results['x_plot_mm'] = x_plot_limit * 1e3
+        results['y_plot_mm'] = y_plot_limit * 1e3
+        results['warnings'] = ["Nyquist criterion for distance is relevant for z_prop_m > 0."]
+        results['x_ok'] = True
+        results['y_ok'] = True
+        return results
+
+    # Calculate the maximum resolvable angle for x and y given dx and dy
+    # Make sure the argument to arcsin is between -1 and 1
+    arg_x = np.clip(wavelength / (2 * dx), -1.0, 1.0)
+    arg_y = np.clip(wavelength / (2 * dy), -1.0, 1.0)
+
+    theta_max_resolvable_x_rad = np.arcsin(arg_x)
+    theta_max_resolvable_y_rad = np.arcsin(arg_y)
+
+    x_resolvable_m = z_prop * np.tan(theta_max_resolvable_x_rad)
+    y_resolvable_m = z_prop * np.tan(theta_max_resolvable_y_rad)
+
+    results['x_resolvable_mm'] = x_resolvable_m * 1e3 # Convert to mm
+    results['y_resolvable_mm'] = y_resolvable_m * 1e3 # Convert to mm
+
+    results['x_plot_mm'] = x_plot_limit * 1e3
+    results['y_plot_mm'] = y_plot_limit * 1e3
+
+    x_ok = x_resolvable_m >= x_plot_limit
+    y_ok = y_resolvable_m >= y_plot_limit
+
     if not x_ok:
-        warnings.append(f"WARNING: dx ({dx*1e6:.2f} um) is too large. Required dx for {theta_max_deg}° angle is {dx_required*1e6:.2f} um.")
+        warnings.append(f"WARNING: X-resolution is insufficient! Max reliable distance: {results['x_resolvable_mm']:.2f} mm,"
+                        f" but plot requires {results['x_plot_mm']:.2f} mm."
+                        " Increase Nx or reduce Lx_mm to capture wider distances reliably.")
     if not y_ok:
-        warnings.append(f"WARNING: dy ({dy*1e6:.2f} um) is too large. Required dy for {theta_max_deg}° angle is {dy_required*1e6:.2f} um.")
-    
-    return {
-        "x_ok": x_ok,
-        "y_ok": y_ok,
-        "dx_required_m": dx_required,
-        "dy_required_m": dy_required,
-        "warnings": warnings
-    }
+        warnings.append(f"WARNING: Y-resolution is insufficient! Max reliable distance: {results['y_resolvable_mm']:.2f} mm,"
+                        f" but plot requires {results['y_plot_mm']:.2f} mm."
+                        " Increase Ny or reduce Ly_mm to capture wider distances reliably.")
+
+    results['x_ok'] = x_ok
+    results['y_ok'] = y_ok
+    results['warnings'] = warnings
+
+    return results
 
 def check_wrap_around_margin(Lx, Ly, z_prop, aperture_size, wavelength, margin_factor=3.0):
     """
@@ -139,20 +145,13 @@ def check_wrap_around_margin(Lx, Ly, z_prop, aperture_size, wavelength, margin_f
         "warnings": warnings
     }
 
-def load_config(file_path):
-    """Loads configuration parameters from a JSON file."""
-    with open(file_path, 'r') as f:
-        config = json.load(f)
-    return config
-
 def run_all_checks(config_file_name):
     """Runs and plots the single slit diffraction experiment."""
-    config_path = project_root / 'config' / config_file_name
-    print(f"--- Running Single Slit Experiment from {config_file_name} ---")
 
-    config = load_config(config_path)
+    config = load_config(config_file_name)
     sim_cfg = config['simulation']
     aptr_cfg = config['aperture_params']
+    plot_lims_cfg = config['plot_limits']
     wavelength = sim_cfg['wavelength_nm'] * 1e-9
     Nx = sim_cfg['Nx']
     Ny = sim_cfg['Ny']
@@ -183,17 +182,23 @@ def run_all_checks(config_file_name):
         print("  -> Fresnel (near-field) regime. Fraunhofer theory might NOT be accurate for comparison.")
         print("     Expect differences, especially far from the center.")
 
-    # Nyquist Criterion Check
-    nyquist_results = check_nyquist_criterion(dx, dy, wavelength)
-    print(f"\nNyquist Criterion (Pixel Size):")
-    print(f"  Current dx: {dx*1e6:.2f} um, dy: {dy*1e6:.2f} um")
-    print(f"  Required dx: {nyquist_results['dx_required_m']*1e6:.2f} um, Required dy: {nyquist_results['dy_required_m']*1e6:.2f} um")
+    # Nyquist Criterion Check (using plot limits for theta_max estimation)
+    x_plot_limit = plot_lims_cfg['diffraction_pattern_2d']['xmax_mm'] * 1e-3 # Assuming symmetric plot limits
+    y_plot_limit = plot_lims_cfg['diffraction_pattern_2d']['ymax_mm'] * 1e-3 # Assuming symmetric plot limits
+
+    nyquist_results = check_nyquist_criterion(dx, dy, wavelength, x_plot_limit, y_plot_limit, z_prop)
+    
+    print(f"\nNyquist Criterion (Spatial Resolution):")
+    print(f"  Max reliable distance (X): {nyquist_results['x_resolvable_mm']:.2f} mm")
+    print(f"  Max reliable distance (Y): {nyquist_results['y_resolvable_mm']:.2f} mm")
+    print(f"  Plotting range (X): +/- {nyquist_results['x_plot_mm']:.2f} mm")
+    print(f"  Plotting range (Y): +/- {nyquist_results['y_plot_mm']:.2f} mm")
+
     if nyquist_results['x_ok'] and nyquist_results['y_ok']:
-        print("  -> Pixel size (dx, dy) seems adequate to resolve high angles.")
+        print("  -> Pixel sizes (dx, dy) are adequate for the specified plot range.")
     else:
         for warning in nyquist_results['warnings']:
             print(f"  {warning}")
-        print("  -> Consider increasing Nx and Ny to reduce dx/dy and improve high-angle resolution.")
 
     # Wrap-Around Margin Check
     wrap_around_results = check_wrap_around_margin(Lx, Ly, z_prop, aperture_size, wavelength)
