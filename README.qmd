@@ -44,7 +44,6 @@ pip install -r requirements.txt
 pip install jupyter
 ```
 
-
 ## Parameters
 
 You can play around with parameters with the json files in the config folder.
@@ -127,17 +126,20 @@ Wrap-Around Margin (Simulation Window Size):
 
 To run the experiments there is a notebook called running_experiments.ipynb that will get you started.
 If you change the simulation files found in lightpy/ then you will have to restart the kernel and rerun the header code.
+
+If you just want to run using just python there is a starter script in the scripts folder.
+
 Changing the params files you can just rerun the experiments.
 
 ## Results
 
 Here are the diffraction patterns that the simulation outputs (blue) and comparison to theory (red dashed).
 
-![](results/single.png){fig-align="center" width=100%}
-![](results/single_2d.png){fig-align="center" width=70%}
+![](results/single_slit.png){fig-align="center" width=100%}
+![](results/single_slit_2d.png){fig-align="center" width=70%}
 
-![](results/double.png){fig-align="center" width=100%}
-![](results/double_2d.png){fig-align="center" width=70%}
+![](results/double_slit.png){fig-align="center" width=100%}
+![](results/double_slit_2d.png){fig-align="center" width=70%}
 
-![](results/circular.png){fig-align="center" width=100%}
-![](results/circular_2d.png){fig-align="center" width=70%}
+![](results/circular_aperture.png){fig-align="center" width=100%}
+![](results/circular_aperture_2d.png){fig-align="center" width=70%}

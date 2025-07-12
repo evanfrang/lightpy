@@ -121,25 +121,29 @@ run_all_checks("single_slit_basic.json")
 To run the experiments there is a notebook called
 running_experiments.ipynb that will get you started. If you change the
 simulation files found in lightpy/ then you will have to restart the
-kernel and rerun the header code. Changing the params files you can just
-rerun the experiments.
+kernel and rerun the header code.
+
+If you just want to run using just python there is a starter script in
+the scripts folder.
+
+Changing the params files you can just rerun the experiments.
 
 ## Results
 
 Here are the diffraction patterns that the simulation outputs (blue) and
 comparison to theory (red dashed).
 
-<img src="results/single.png" style="width:100.0%"
+<img src="results/single_slit.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/single_2d.png" style="width:70.0%"
-data-fig-align="center" />
-
-<img src="results/double.png" style="width:100.0%"
-data-fig-align="center" />
-<img src="results/double_2d.png" style="width:70.0%"
+<img src="results/single_slit_2d.png" style="width:70.0%"
 data-fig-align="center" />
 
-<img src="results/circular.png" style="width:100.0%"
+<img src="results/double_slit.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/circular_2d.png" style="width:70.0%"
+<img src="results/double_slit_2d.png" style="width:70.0%"
+data-fig-align="center" />
+
+<img src="results/circular_aperture.png" style="width:100.0%"
+data-fig-align="center" />
+<img src="results/circular_aperture_2d.png" style="width:70.0%"
 data-fig-align="center" />
