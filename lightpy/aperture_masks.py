@@ -13,7 +13,7 @@ def create_single_slit_mask(X, Y, slit_width, slit_height):
     Returns:
         np.ndarray: A complex 2D array (mask) where 1.0 represents open and 0.0 represents blocked.
     """
-    mask = np.zeros(X.shape, dtype=complex)
+    mask = np.zeros(X.shape, dtype=np.complex64)
     mask[(np.abs(Y) <= slit_height / 2) & (np.abs(X) <= slit_width / 2)] = 1.0
     return mask
 
@@ -31,7 +31,7 @@ def create_double_slit_mask(X, Y, slit_width, slit_height, slit_separation):
     Returns:
         np.ndarray: A complex 2D array (mask).
     """
-    mask = np.zeros(X.shape, dtype=complex)
+    mask = np.zeros(X.shape, dtype=np.complex64)
     # Slit 1 (left of center)
     mask[(np.abs(Y) <= slit_height / 2) &
          (X >= -slit_separation / 2 - slit_width / 2) &
@@ -54,7 +54,7 @@ def create_circular_aperture_mask(X, Y, radius):
     Returns:
         np.ndarray: A complex 2D array (mask).
     """
-    mask = np.zeros(X.shape, dtype=complex)
+    mask = np.zeros(X.shape, dtype=np.complex64)
     R = np.sqrt(X**2 + Y**2)
     mask[R <= radius] = 1.0
     return mask

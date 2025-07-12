@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import jv
 import matplotlib.colors as colors
+import matplotlib
+matplotlib.use('Agg')
 
 def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, config):
     """
@@ -85,7 +87,8 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
     ax2.grid(True)
 
     plt.tight_layout()
-    plt.show()
+    #plt.show()
+    plt.savefig(f'results/{experiment_type}.png')
 
     # Plot 3: 2D Diffraction Pattern
     I_final_positive = np.clip(I_final, a_min=1e-10, a_max=None)
@@ -99,4 +102,5 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
     plt.ylim(diffraction_pattern_plot_lims_2d['ymin_mm'], diffraction_pattern_plot_lims_2d['ymax_mm'])
     plt.xlim(diffraction_pattern_plot_lims_2d['xmin_mm'], diffraction_pattern_plot_lims_2d['xmax_mm'])
     #plt.colorbar(im3, label='Intensity')
-    plt.show()
+    #plt.show()
+    plt.savefig(f'results/{experiment_type}_2d.png')
