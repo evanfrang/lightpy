@@ -3,9 +3,9 @@
     "simulation": {
         "wavelength_nm": 500,
         "Nx": 16000,
-        "Ny": 480,
+        "Ny": 1000,
         "Lx_mm": 50.0,
-        "Ly_mm": 10.0,
+        "Ly_mm": 20.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {

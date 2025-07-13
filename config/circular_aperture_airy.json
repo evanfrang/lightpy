@@ -2,14 +2,14 @@
     "experiment_type": "circular_aperture",
     "simulation": {
         "wavelength_nm": 550,
-        "Nx": 6000,
-        "Ny": 6000,
-        "Lx_mm": 30.0,
-        "Ly_mm": 30.0,
+        "Nx": 8000,
+        "Ny": 8000,
+        "Lx_mm": 80.0,
+        "Ly_mm": 80.0,
         "z_prop_m": 0.5
     },
     "aperture_params": {
-        "radius_mm": 0.1
+        "radius_mm": 0.06
     },
     "plot_limits": {
         "initial_field": {
