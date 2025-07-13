@@ -62,8 +62,8 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
 
     elif experiment_type == "double_slit":
         # Theory: I = I0 [cos (π d x / D /λ)]2 * [sin (π a x / D /λ)/( π a x / D /λ)]2
-        width = aptr_cfg['slit_width_um'] * 1.e-6
-        sep = aptr_cfg['slit_separation_um'] * 1.e-6
+        width = aptr_cfg['width_um'] * 1.e-6
+        sep = aptr_cfg['separation_um'] * 1.e-6
         cos_arg = np.pi * sep * x_coords / z_prop \
             / (sim_cfg['wavelength_nm'] * 1e-9)
         sin_arg = np.pi * width * x_coords / z_prop \

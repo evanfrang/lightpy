@@ -5,9 +5,8 @@ Evan Frangipane
 
 LightPy is a project to simulate optics phenomena using the Angular
 Spectrum Method (ASM). Currently, you can run single slit, double slit,
-and circular aperture experiments. Also, I have the theoretical
-intensity curves for comparison, and they seem to agree in certain
-regions of parameter space.
+circular aperture, and multislit (grating-ish) experiments. Comparison
+to theory is done on the plots.
 
 ## Python Requirements
 
@@ -131,7 +130,8 @@ Changing the params files you can just rerun the experiments.
 ## Results
 
 Here are the diffraction patterns that the simulation outputs (blue) and
-comparison to theory (red dashed).
+comparison to theory (red dashed) and envelope where applicable (green
+dashed).
 
 <img src="results/single_slit.png" style="width:100.0%"
 data-fig-align="center" />
@@ -141,6 +141,11 @@ data-fig-align="center" />
 <img src="results/double_slit.png" style="width:100.0%"
 data-fig-align="center" />
 <img src="results/double_slit_2d.png" style="width:70.0%"
+data-fig-align="center" />
+
+<img src="results/circular_aperture.png" style="width:100.0%"
+data-fig-align="center" />
+<img src="results/circular_aperture_2d.png" style="width:70.0%"
 data-fig-align="center" />
 
 <img src="results/circular_aperture.png" style="width:100.0%"
