@@ -148,7 +148,7 @@ data-fig-align="center" />
 <img src="results/circular_aperture_2d.png" style="width:70.0%"
 data-fig-align="center" />
 
-<img src="results/circular_aperture.png" style="width:100.0%"
+<img src="results/grating.png" style="width:100.0%"
 data-fig-align="center" />
-<img src="results/circular_aperture_2d.png" style="width:70.0%"
+<img src="results/grating_2d.png" style="width:70.0%"
 data-fig-align="center" />
