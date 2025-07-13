@@ -166,8 +166,6 @@ def run_all_checks(config_file_name):
         aperture_size = aptr_cfg['width_um'] * 1e-6
     elif 'radius_mm' in aptr_cfg:
         aperture_size = aptr_cfg['radius_mm'] * 1e-3
-    elif 'slit_width_um' in aptr_cfg:
-        aperture_size = aptr_cfg['slit_width_um'] * 1e-6
     else:
         raise ValueError
 

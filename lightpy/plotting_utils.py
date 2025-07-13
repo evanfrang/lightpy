@@ -81,6 +81,25 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
         intensity_theory = (2 * jv(1, bes_arg) / (bes_arg))**2
         ax2.plot(x_coords_mm, intensity_theory, color='red', linestyle='--')
 
+    elif experiment_type == "grating":
+        # Theory : delta = 2*pi*b*x/D/lambda
+        # single = 
+        # I = I0 [sin(N*delta/2)/sin(delta/2)]2 * [sin(delta/2)/(delta/2)]2
+        # envelope: I0 * [sin(delta/2)/(delta/2)]2
+        width = aptr_cfg['width_um'] * 1.e-6
+        density = aptr_cfg['grating_density_lines_per_mm'] * 1.e3
+        delta = 2*np.pi * 1/density * x_coords / z_prop \
+            / wavelength
+        single_arg = np.pi * width * x_coords / z_prop \
+            / wavelength
+        N = aptr_cfg['num_slits']
+        intensity_envelope = (np.sin(single_arg) / (single_arg))**2
+        intensity_theory = (np.sin(N*delta/2) / np.sin(delta/2))**2 \
+            * intensity_envelope / N**2
+        #intensity_theory = (np.sin(N*delta/2) / np.sin(delta/2))**2
+        ax2.plot(x_coords_mm, intensity_theory, color='red', linestyle='--')
+        ax2.plot(x_coords_mm, intensity_envelope, color='green', linestyle='--')
+
     ax2.set_title(f'Diffraction Pattern (z = {z_prop} m, λ={sim_cfg["wavelength_nm"]:.0f} nm)')
     ax2.set_xlabel('x (mm)')
     ax2.set_ylabel('Normalized Intensity')

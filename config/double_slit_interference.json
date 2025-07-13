@@ -9,9 +9,9 @@
         "z_prop_m": 0.5
     },
     "aperture_params": {
-        "slit_width_um": 40.0,
-        "slit_height_mm": 5.0,
-        "slit_separation_um": 200.0
+        "width_um": 40.0,
+        "height_mm": 5.0,
+        "separation_um": 200.0
     },
     "plot_limits": {
         "initial_field": {
