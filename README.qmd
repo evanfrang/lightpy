@@ -144,5 +144,5 @@ Here are the diffraction patterns that the simulation outputs (blue) and compari
 ![](results/circular_aperture.png){fig-align="center" width=100%}
 ![](results/circular_aperture_2d.png){fig-align="center" width=70%}
 
-![](results/circular_aperture.png){fig-align="center" width=100%}
-![](results/circular_aperture_2d.png){fig-align="center" width=70%}
+![](results/grating.png){fig-align="center" width=100%}
+![](results/grating_2d.png){fig-align="center" width=70%}
