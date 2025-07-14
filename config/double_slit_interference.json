@@ -8,6 +8,11 @@
         "Ly_mm": 50.0,
         "z_prop_m": 0.5
     },
+    "tiling": {
+        "use_tiling": false,
+        "tile_size": 512,
+        "pad": 64
+    },
     "aperture_params": {
         "width_um": 40.0,
         "height_mm": 5.0,

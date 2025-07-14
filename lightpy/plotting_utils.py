@@ -109,12 +109,16 @@ def plot_simulation_results(U0_initial_field_mag, I_final, x_coords, y_coords, c
     #plt.show()
     plt.savefig(f'results/{experiment_type}.png')
 
+    def downsample(arr, factor=4):
+        return arr[::factor, ::factor]
+
     # Plot 3: 2D Diffraction Pattern
     I_final_positive = np.clip(I_final, a_min=1e-10, a_max=None)
     log_vmin = I_final_positive.max() * 2e-3
     norm_2d = colors.LogNorm(vmin=log_vmin, vmax=I_final_positive.max())
     plt.figure()
-    im3 = plt.imshow(I_final, cmap='hot', extent=imshow_extent, origin='lower', norm=norm_2d)
+    I_final_ds = downsample(I_final, factor=4)
+    im3 = plt.imshow(I_final_ds, cmap='hot', extent=imshow_extent, origin='lower', norm=norm_2d)
     plt.title(f'2D Diffraction Pattern (z = {z_prop} m)')
     plt.xlabel('x (mm)')
     plt.ylabel('y (mm)')

@@ -4,12 +4,17 @@
         "wavelength_nm": 550,
         "Nx": 8000,
         "Ny": 8000,
-        "Lx_mm": 80.0,
-        "Ly_mm": 80.0,
+        "Lx_mm": 50.0,
+        "Ly_mm": 50.0,
         "z_prop_m": 0.5
     },
+    "tiling": {
+        "use_tiling": false,
+        "tile_size": 512,
+        "pad": 64
+    },
     "aperture_params": {
-        "radius_mm": 0.06
+        "radius_mm": 0.2
     },
     "plot_limits": {
         "initial_field": {

@@ -1,4 +1,4 @@
-from .core_propagator import run_angular_spectrum_simulation
+from .core_propagator import run_angular_spectrum_simulation, run_tiled_propagation
 from .aperture_masks import create_single_slit_mask, create_double_slit_mask
 from .aperture_masks import create_circular_aperture_mask
 from .plotting_utils import plot_simulation_results
