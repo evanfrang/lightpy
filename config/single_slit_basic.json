@@ -2,16 +2,18 @@
     "experiment_type": "single_slit",
     "simulation": {
         "wavelength_nm": 500,
-        "Nx": 16000,
-        "Ny": 1000,
-        "Lx_mm": 50.0,
-        "Ly_mm": 20.0,
+        "Nx": 16384,
+        "Ny": 1024,
+        "Lx_mm": 100.0,
+        "Ly_mm": 50.0,
         "z_prop_m": 0.5
     },
     "tiling": {
-        "use_tiling": false,
-        "tile_size": 512,
-        "pad": 64
+        "use_tiling": true,
+        "tile_size_x": 8192,
+        "pad_x": 1024,
+        "tile_size_y": 128,
+        "pad_y": 32
     },
     "aperture_params": {
         "width_um": 100.0,

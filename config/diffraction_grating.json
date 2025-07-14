@@ -2,10 +2,10 @@
   "experiment_type": "grating",
   "simulation": {
     "wavelength_nm": 632.8,
-    "Nx": 64000,
-    "Ny": 2000,
-    "Lx_mm": 300.0,
-    "Ly_mm": 50.0,
+    "Nx": 16000,
+    "Ny": 800,
+    "Lx_mm": 200.0,
+    "Ly_mm": 100.0,
     "z_prop_m": 0.5
   },
   "tiling": {
@@ -14,10 +14,10 @@
     "pad": 64
   },
   "aperture_params": {
-    "width_um": 40.0,
+    "width_um": 30.0,
     "height_mm": 5.0,
-    "grating_density_lines_per_mm": 10.0,
-    "num_slits": 8
+    "grating_density_lines_per_mm": 5.0,
+    "num_slits": 10
   },
   "plot_limits": {
         "initial_field": {

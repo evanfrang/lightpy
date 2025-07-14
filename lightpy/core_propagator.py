@@ -37,33 +37,40 @@ def run_angular_spectrum_simulation(U0, wavelength, Lx, Ly, z_prop):
     return ifft2(ifftshift(A0))
     
 
-def run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size=512, pad=64):
+def run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size_x=512, pad_x=64, tile_size_y=512, pad_y=64):
     Ny, Nx = U0.shape
     output = np.zeros_like(U0, dtype=np.complex128)
 
-    step = tile_size - 2 * pad
-    for y in range(0, Ny, step):
-        for x in range(0, Nx, step):
-            y0 = max(y - pad, 0)
-            y1 = min(y + tile_size - pad, Ny)
-            x0 = max(x - pad, 0)
-            x1 = min(x + tile_size - pad, Nx)
+    dx = Lx / Nx
+    dy = Ly / Ny
 
-            tile = np.zeros((tile_size, tile_size), dtype=U0.dtype)
+    step_x = tile_size_x - 2 * pad_x
+    step_y = tile_size_y - 2 * pad_y
+    for y in range(0, Ny, step_y):
+        for x in range(0, Nx, step_x):
+            y0 = max(y - pad_y, 0)
+            y1 = min(y + tile_size_y - pad_y, Ny)
+            x0 = max(x - pad_x, 0)
+            x1 = min(x + tile_size_x - pad_x, Nx)
+
+            tile = np.zeros((tile_size_y, tile_size_x), dtype=U0.dtype)
             sy = slice(0, y1 - y0)
             sx = slice(0, x1 - x0)
             tile[sy, sx] = U0[y0:y1, x0:x1]
 
-            tile_prop = run_angular_spectrum_simulation(tile, wavelength, Lx, Ly, z_prop)
+            Lx_tile = dx * tile_size_x
+            Ly_tile = dy * tile_size_y
+            tile_prop = run_angular_spectrum_simulation(tile, wavelength, Lx_tile, Ly_tile, z_prop)
+            #tile_prop = run_angular_spectrum_simulation(tile, wavelength, Lx, Ly, z_prop)
 
             # Crop to central (non-padded) region
-            cy0, cy1 = pad, tile_size - pad
-            cx0, cx1 = pad, tile_size - pad
-
+            cy0, cy1 = pad_y, tile_size_y - pad_y
+            cx0, cx1 = pad_x, tile_size_x - pad_x
+            
             oy0 = y
-            oy1 = min(y + step, Ny)
+            oy1 = min(y + step_y, Ny)
             ox0 = x
-            ox1 = min(x + step, Nx)
+            ox1 = min(x + step_x, Nx)
 
             output[oy0:oy1, ox0:ox1] = tile_prop[cy0:cy0 + (oy1 - oy0), cx0:cx0 + (ox1 - ox0)]
 

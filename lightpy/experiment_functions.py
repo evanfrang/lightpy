@@ -46,9 +46,12 @@ def run_single_slit_experiment(config_file_name="single_slit_basic.json"):
     if not tiling_cfg['use_tiling']:
       U_final = run_angular_spectrum_simulation(U0, wavelength, Lx, Ly, z_prop)
     else:
-      tile_size = tiling_cfg['tile_size']
-      pad = tiling_cfg['pad']
-      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size, pad)
+      tile_size_x = tiling_cfg['tile_size_x']
+      pad_x = tiling_cfg['pad_x']
+      tile_size_y = tiling_cfg['tile_size_y']
+      pad_y = tiling_cfg['pad_y']
+      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, \
+                                      tile_size_x, pad_x, tile_size_y, pad_y)
     I_final = np.abs(U_final)**2
 
     # Plot results using the utility function
@@ -89,9 +92,12 @@ def run_double_slit_experiment(config_file_name="double_slit_interference.json")
     if not tiling_cfg['use_tiling']:
       U_final = run_angular_spectrum_simulation(U0, wavelength, Lx, Ly, z_prop)
     else:
-      tile_size = tiling_cfg['tile_size']
-      pad = tiling_cfg['pad']
-      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size, pad)
+      tile_size_x = tiling_cfg['tile_size_x']
+      pad_x = tiling_cfg['pad_x']
+      tile_size_y = tiling_cfg['tile_size_y']
+      pad_y = tiling_cfg['pad_y']
+      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, \
+                                      tile_size_x, pad_x, tile_size_y, pad_y)
     I_final = np.abs(U_final)**2
 
     # Plot results using the utility function
@@ -129,9 +135,12 @@ def run_circular_aperture_experiment(config_file_name="circular_aperture_airy.js
     if not tiling_cfg['use_tiling']:
       U_final = run_angular_spectrum_simulation(U0, wavelength, Lx, Ly, z_prop)
     else:
-      tile_size = tiling_cfg['tile_size']
-      pad = tiling_cfg['pad']
-      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size, pad)
+      tile_size_x = tiling_cfg['tile_size_x']
+      pad_x = tiling_cfg['pad_x']
+      tile_size_y = tiling_cfg['tile_size_y']
+      pad_y = tiling_cfg['pad_y']
+      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, \
+                                      tile_size_x, pad_x, tile_size_y, pad_y)
     I_final = np.abs(U_final)**2
 
     # Plot results using the utility function
@@ -176,9 +185,12 @@ def run_grating_experiment(config_file_name="diffraction_grating.json"):
     if not tiling_cfg['use_tiling']:
       U_final = run_angular_spectrum_simulation(U0, wavelength, Lx, Ly, z_prop)
     else:
-      tile_size = tiling_cfg['tile_size']
-      pad = tiling_cfg['pad']
-      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, tile_size, pad)
+      tile_size_x = tiling_cfg['tile_size_x']
+      pad_x = tiling_cfg['pad_x']
+      tile_size_y = tiling_cfg['tile_size_y']
+      pad_y = tiling_cfg['pad_y']
+      U_final = run_tiled_propagation(U0, wavelength, Lx, Ly, z_prop, \
+                                      tile_size_x, pad_x, tile_size_y, pad_y)
     I_final = np.abs(U_final)**2
 
     # Plot results using the utility function
